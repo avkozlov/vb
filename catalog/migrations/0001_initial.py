@@ -21,4 +21,21 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.CreateModel(
+            name='Rubrica',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=150, null=True, verbose_name=b'\xd0\xa0\xd1\x83\xd0\xb1\xd1\x80\xd0\xb8\xd0\xba\xd0\xb0', blank=True)),
+                ('parent', models.ForeignKey(related_name=b'children', blank=True, to='catalog.Rubrica', null=True)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.AddField(
+            model_name='coll',
+            name='rubric',
+            field=models.ForeignKey(blank=True, to='catalog.Rubrica', null=True),
+            preserve_default=True,
+        ),
     ]
