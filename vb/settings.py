@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = '/'
 
+LOGIN_URL = 'django.contrib.auth.views.login'
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -39,6 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog',
+    'madmin',
+    'authvb',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,6 +59,7 @@ ROOT_URLCONF = 'vb.urls'
 
 WSGI_APPLICATION = 'vb.wsgi.application'
 
+LOGIN_REDIRECT_URL = '/profile'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -86,6 +91,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
 
 TEMPLATE_DIRS = (
     'templates',
