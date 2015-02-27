@@ -22,7 +22,9 @@ class Coll(models.Model):
     title = models.CharField(max_length=150, verbose_name="Название коллекции")
     description = models.CharField(max_length=555, verbose_name="Описание коллекции")
     rubric = models.ForeignKey(Rubrica, blank=True, null=True)
-    owner = models.ForeignKey(User, unique=True, blank=True, null=True)
+    owner = models.ForeignKey(User, unique=False)
+    #owner = models.ManyToManyField(User, blank=True, null=True, default=True)
+
 
     def __unicode__(self):
 
