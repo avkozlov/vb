@@ -3,7 +3,14 @@
 
 {% block content %}
 
-{{ colls }}
+       <ui>
+       {% for art in colls %}
+
+
+ <li>{{ art }}</li>
+
+      {% endfor %}
+           </ui>
 
 {% endblock %}
 

@@ -41,8 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog',
-    'madmin',
-    'authvb',
+    #'madmin',
+    #'authvb',
 )
 
 MIDDLEWARE_CLASSES = (

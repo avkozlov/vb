@@ -15,6 +15,18 @@ class Rubrica(models.Model):
         return self.title
 
 
+class Shop(models.Model):
+
+    title = models.CharField(max_length=150, verbose_name="Название магазина")
+    description = models.CharField(max_length=555, verbose_name="Описание магазина")
+    owner = models.ForeignKey(User)
+
+
+
+    def __unicode__(self):
+
+        return self.title
+
 
 
 class Coll(models.Model):
@@ -22,8 +34,8 @@ class Coll(models.Model):
     title = models.CharField(max_length=150, verbose_name="Название коллекции")
     description = models.CharField(max_length=555, verbose_name="Описание коллекции")
     rubric = models.ForeignKey(Rubrica, blank=True, null=True)
-    owner = models.ForeignKey(User, unique=False)
-    #owner = models.ManyToManyField(User, blank=True, null=True, default=True)
+    shop = models.ForeignKey(Shop)
+
 
 
     def __unicode__(self):
