@@ -41,8 +41,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'catalog',
-    #'madmin',
-    #'authvb',
+    'madmin',
+    'authvb',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,11 +53,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'authvb.models.SubdomainMiddleware',
 )
 
 ROOT_URLCONF = 'vb.urls'
 
 WSGI_APPLICATION = 'vb.wsgi.application'
+
+SESSION_COOKIE_DOMAIN = '.localhost'
 
 LOGIN_REDIRECT_URL = '/profile'
 
