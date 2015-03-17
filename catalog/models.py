@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
+from django.contrib.sites.managers import CurrentSiteManager
+from django.core.urlresolvers import reverse
+from autoslug import AutoSlugField
+from django.template.defaultfilters import slugify
+from pytils import translit
+
 
 
 # Create your models here.
@@ -35,7 +42,20 @@ class Coll(models.Model):
     description = models.CharField(max_length=555, verbose_name="Описание коллекции")
     rubric = models.ForeignKey(Rubrica, blank=True, null=True)
     owner = models.ForeignKey(User)
+    site = models.ForeignKey(Site, blank=True, null=True)
+    objects = models.Manager()
+    on_site = CurrentSiteManager()
+    pub_date = models.DateField(auto_now_add=True)
+    slug = models.SlugField(max_length=150, blank=True)
 
+    def save(self, **kwargs):
+        super(Coll, self).save()
+        if not self.slug:
+            self.slug = translit.slugify(self.title) + "-" + str(self.id)
+        super(Coll, self).save(**kwargs)
+
+    def get_absolute_url(self):
+        return reverse('articles', kwargs={'slug': self.slug})
 
 
     def __unicode__(self):

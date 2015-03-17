@@ -18,3 +18,6 @@ class ListColl(LoggedMixin, ListView):
 
         return colls
 
+
+
+

@@ -3,5 +3,9 @@ from models import Coll, Rubrica
 # Register your models here.
 
 
-admin.site.register(Coll)
+class CollAdmint(admin.ModelAdmin):
+    list_display = ('title', 'description', 'owner', 'site')
+
+admin.site.register(Coll, CollAdmint)
 admin.site.register(Rubrica)
+

@@ -3,8 +3,26 @@
 
 {% block content %}
 
-        {{ red }}
-               {{ rk }}
-        {{ lair }}
+        <!--{{ red }}-->
+               <!--{{ rk }}-->
+        <!--{{ lair }}-->
+        <!--{{ sites }}-->
+       <!--</br>-->
+        <!--{{ which }}-->
+        <!--</br>-->
+        <!--{{ part }}-->
+
+        <ul>
+        {% for colls in posts %}
+
+        <li><a href="{{ colls.get_absolute_url }}">{{ colls }}</a></li>
+
+        {% endfor %}
+           </ul>
+
+        {{ post1 }}
+        </br>
+        {{ post1.description }}
+
 
 {% endblock %}

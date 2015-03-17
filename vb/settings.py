@@ -40,12 +40,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'catalog',
     'madmin',
     'authvb',
 )
 
 MIDDLEWARE_CLASSES = (
+    'middleware.MultiSiteMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -60,7 +62,6 @@ ROOT_URLCONF = 'vb.urls'
 
 WSGI_APPLICATION = 'vb.wsgi.application'
 
-SESSION_COOKIE_DOMAIN = '.localhost'
 
 LOGIN_REDIRECT_URL = '/profile'
 
@@ -95,7 +96,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+SESSION_COOKIE_DOMAIN = ".localhost"
 
+SESSION_COOKIE_NAME = "anycook"
 
 TEMPLATE_DIRS = (
     'templates',
