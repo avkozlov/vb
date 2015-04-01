@@ -1,14 +1,23 @@
 <html>
 <head>
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Optional theme -->
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
 
 </head>
 
-<body>
+<body ng-app="{% block ng-app %}example.app{% endblock %}">
+
+
+
+
+rlekvnerlnbver
+
 
     <div>
       {{ user }}
@@ -24,6 +33,10 @@
 
 {% endblock %}
 
+<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}angular/angular.min.js"></script>
+<script src="{{ STATIC_URL }}angular/angular-resource.js"></script>
+<script src="{{ STATIC_URL }}angular/app.js"></script>
 </body>
 
 

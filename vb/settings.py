@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -22,10 +24,29 @@ SECRET_KEY = 'as!tc#0o7zq2c#aynt0i!tfl6bgr0p06o@-spyy3f_fyzv_tbc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = 'customauth.MyUser'
+
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+#
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    'django.core.context_processors.static',
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+)
 
+REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+    )
+}
+
+#CSRF_COOKIE_SECURE = True
 
 LOGIN_REDIRECT_URL = '/'
 
@@ -44,13 +65,18 @@ INSTALLED_APPS = (
     'catalog',
     'madmin',
     'authvb',
+    'rest_framework',
+    'customauth',
+    'sorl.thumbnail',
+
 )
 
 MIDDLEWARE_CLASSES = (
     'middleware.MultiSiteMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware'
+    'catalog.disable.DisableCSRF',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -96,6 +122,26 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = '/home/anton/projects/vitrina/vb/static'
+
+
+
+MEDIA_ROOT= os.path.join(BASE_DIR,'media/')
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR,'static-assets/'),
+)
+
+
 SESSION_COOKIE_DOMAIN = ".localhost"
 
 SESSION_COOKIE_NAME = "anycook"
@@ -103,3 +149,4 @@ SESSION_COOKIE_NAME = "anycook"
 TEMPLATE_DIRS = (
     'templates',
 )
+

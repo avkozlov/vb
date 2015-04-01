@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Coll, Rubrica
+from models import Coll, Rubrica, Picture, Size
 # Register your models here.
 
 
@@ -8,4 +8,6 @@ class CollAdmint(admin.ModelAdmin):
 
 admin.site.register(Coll, CollAdmint)
 admin.site.register(Rubrica)
+admin.site.register(Picture)
+admin.site.register(Size)
 

@@ -3,26 +3,36 @@
 
 {% block content %}
 
-        <!--{{ red }}-->
-               <!--{{ rk }}-->
-        <!--{{ lair }}-->
-        <!--{{ sites }}-->
-       <!--</br>-->
-        <!--{{ which }}-->
+        <!--&lt;!&ndash;{{ red }}&ndash;&gt;-->
+               <!--&lt;!&ndash;{{ rk }}&ndash;&gt;-->
+        <!--&lt;!&ndash;{{ lair }}&ndash;&gt;-->
+        <!--&lt;!&ndash;{{ sites }}&ndash;&gt;-->
+       <!--&lt;!&ndash;</br>&ndash;&gt;-->
+        <!--&lt;!&ndash;{{ which }}&ndash;&gt;-->
+        <!--&lt;!&ndash;</br>&ndash;&gt;-->
+        <!--&lt;!&ndash;{{ part }}&ndash;&gt;-->
+
+        <!--<ul>-->
+        <!--{% for colls in posts %}-->
+
+        <!--<li><a href="{{ colls.get_absolute_url }}">{{ colls }}</a></li>-->
+
+        <!--{% endfor %}-->
+           <!--</ul>-->
+
+        <!--{{ post1 }}-->
         <!--</br>-->
-        <!--{{ part }}-->
+        <!--{{ post1.description }}-->
 
-        <ul>
-        {% for colls in posts %}
-
-        <li><a href="{{ colls.get_absolute_url }}">{{ colls }}</a></li>
-
-        {% endfor %}
-           </ul>
-
-        {{ post1 }}
-        </br>
-        {{ post1.description }}
-
+    <div class="content" ng-controller="{% block ng_controller %}AppController{% endblock %}">
+{% verbatim %}
+    <div class="panel" ng-repeat="post in names">
+        <div class="panel-heading clearfix">
+            <h3 class="panel-title">{{ post.title + ', ' + post.id }}</h3>
+        <img ng-src="{{ post.filename }}" />
+        </div>
+    </div>
+{% endverbatim %}
+</div>
 
 {% endblock %}
