@@ -1,0 +1,63 @@
+    {% extends "base.html" %}
+
+    {% block meta %}
+    <title>{{ view.pics.seo.title }}</title>
+    {% endblock %}
+
+    {% block content %}
+	<section id="content">
+		<aside id="l1">
+		
+			<nav>
+				<ul>
+                 {% load mptt_tags %}{% load current_tags %}{% get_side_menu %}
+				</ul>
+			</nav>
+			
+			<div id="social">
+				<img src="{{ STATIC_URL }}site  /img/s.png" alt="name" />
+			</div>
+			
+			
+		</aside>
+	
+	
+		<div id="right">
+			<div id="adv">
+				<img src="{{ STATIC_URL }}site/img/img.png" alt="name" />
+			</div>
+
+			<div id="pathway">
+				<a href="#">Главная</a>
+    {% for parent in view.pics.current_category.get_ancestors %}
+                <a href="/catalog/{{parent.slug }}">{{ parent.title}}</a>
+                {% endfor %}<a href="#">{{ view.pics.current_category.title}}</a>
+			</div>
+
+
+			<h1>{{ view.pics.seo.h1 }}</h1>
+	
+	<ul id="items">
+                {% for pic in view.pics.pics2 %}
+				<li>
+					<a href="/tovar/{{ pic.collection.slug}}" target="_blank"><img src="{{ pic.medium }}" alt="pic" /></a>
+						<div class="li">
+							<a class="fav in" href="#"></a>
+						</div>
+						<div class="wp">
+							<a class="name" href="#">{{ pic.title }}</a><br />
+							<span class="price">{{ pic.price }}</span> <a class="shop" href="#">{{ pic.collection.shop }}</a>
+						</div>
+				</li>
+                {% endfor %}
+			</ul>
+            </br>
+            </br>
+           {{ view.pics.seo.seotext | safe}}
+            {{ view.pics.flag }}
+			
+			
+		</div>
+		
+	</section>
+    {% endblock %}

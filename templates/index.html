@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+	<section id="content">
+		<div id="right">
+			<div id="adv">
+				<img src="{{ STATIC_URL }}site/img/img.png" alt="name" />
+			</div>
+
+			<h1>Выбирайте одежду и обувь из магазинов Екатеринбурга</h1>
+
+			<div id="cats">
+				<div class="cat">
+					<a href="#">Для женщин</a> (321)
+					<div class="sub">
+						<a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>, <a href="#">Одежда</a>
+					</div>
+				</div><div class="cat">
+					<a href="#">Для мужчин</a> (321)
+					<div class="sub">
+						<a href="#">Одежда</a>, <a href="#">Одежда</a>
+					</div>
+				</div><div class="cat">
+					<a href="#">Для Детей</a> (321)
+					<div class="sub">
+						<a href="#">Одежда</a>, <a href="#">Одежда</a>
+					</div>
+				</div><div class="cat">
+					<a href="#">Обувь</a> (321)
+					<div class="sub">
+						<a href="#">Одежда</a>, <a href="#">Одежда</a>
+					</div>
+				</div><div class="cat">
+					<a href="#">Ручная работа</a> (321)
+					<div class="sub">
+						<a href="#">Одежда</a>, <a href="#">Одежда</a>
+					</div>
+				</div>
+			</div>
+
+
+			<ul id="items">
+                {% for pic in view.pics %}
+				<li>
+					<a href="#"><img src="{{ pic.medium }}" alt="pic" /></a>
+						<div class="li">
+							<a class="fav in" href="#"></a>
+						</div>
+						<div class="wp">
+							<a class="name" href="#">{{ pic.title }}</a><br />
+							<span class="price">24 830 р.</span> <a class="shop" href="#">ЮвелирГолд ЮвелирГолд ЮвелирГолд</a>
+						</div>
+				</li>
+                {% endfor %}
+			</ul>
+
+			<div id="pagi">
+				<div class="pn">
+					<a class="prev end" href="#">&larr; Ctrl <span>Предыдущая</span></a><a class="next" href="#"><span>Следующая</span>Ctrl &rarr;</span></a>
+				</div>
+				<div class="num">
+					<a class="cur" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">4</a><a href="#">5</a><a href="#">6</a><a href="#">7</a><a href="#">8</a><a href="#">9</a><a href="#">10</a><span>...</span><a href="#">200</a>
+				</div>
+			</div>
+
+
+		</div>
+		<aside>
+			<div id="promo">
+                   {% load current_tags %}{% get_articles %}
+
+			</div>
+
+			<div id="adv2">
+				<a href="#"><img src="../static-assets/site/img/b1.png" alt="name" /></a>
+			</div>
+			<div id="social">
+				<img src="../static-assets/site/img/s.png" alt="name" />
+			</div>
+
+			<div id="forum">
+				<div class="item">
+					<a href="#">Форум</a> <span>800 тем</span>
+				</div>
+				<div class="item">
+					<a href="#">Покупка вещей через интернет-магазин</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+			</div>
+
+		</aside>
+	</section>
+
+{% endblock %}

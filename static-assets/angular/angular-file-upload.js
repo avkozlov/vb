@@ -41,7 +41,7 @@ module
         removeAfterUpload: false,
         method: 'POST',
         filters: [],
-        formData: ['name'],
+        formData: [],
         queueLimit: Number.MAX_VALUE,
         withCredentials: true
     })
@@ -268,7 +268,9 @@ module
              * Callback
              * @param {FileItem} fileItem
              */
-            FileUploader.prototype.onBeforeUploadItem = function(fileItem) {};
+            FileUploader.prototype.onBeforeUploadItem = function(fileItem) {
+                fileItem.formData.push()
+            };
             /**
              * Callback
              * @param {FileItem} fileItem

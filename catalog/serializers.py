@@ -10,12 +10,4 @@ class CollSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'description','slug', 'owner')
 
 
-class PictureSerializer(serializers.ModelSerializer):
-
-    # filename = serializers.Field('filename.url', required=False)
-
-    class Meta:
-        model = Picture
-
-
 

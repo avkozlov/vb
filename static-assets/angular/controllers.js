@@ -35,6 +35,8 @@ angular
         };
         uploader.onBeforeUploadItem = function(item) {
             console.info('onBeforeUploadItem', item);
+                item.formData.push({ slugi : window.location.pathname.split("/")[3]});
+                item.formData.push({ title : "pic"+Date()});
         };
         uploader.onProgressItem = function(fileItem, progress) {
             console.info('onProgressItem', fileItem, progress);

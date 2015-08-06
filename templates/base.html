@@ -1,43 +1,160 @@
-<html>
+
+<!DOCTYPE HTML>
+<html lang="en-US">
 <head>
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Optional theme -->
-<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	{% block meta %}
 
 
+    {% endblock %}
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}site/layout.css" media="all" />
+	<script src="{{ STATIC_URL }}site/js/jquery-1.9.1.min.js"></script>
+	<!--[if lt IE 9]>
+    <script src="{{ STATIC_URL }}site/js/html5.js"></script>
+    <script src="{{ STATIC_URL }}site/js/ie.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}site/ie.css" media="all"/>
+    <![endif]-->
+
+     <!-- Bootstrap core CSS -->
+    <!--<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    {% block header %}
+
+    {% endblock %}
+
+
+ <script src="{{ STATIC_URL }}site/js/faq.js"></script>
 </head>
+<body>
+	<header>
+		<div class="inner">
+			<div class="city">
+            <a class="logo" href="/">Комсомольск-на-Амуре</a>
+                <ul>
+					  {% load current_tags %}{% get_city %}
+				</ul>
+            </div>
 
-<body ng-app="{% block ng-app %}example.app{% endblock %}">
+			<nav>
+
+				<ul>
+					<li><a href="/marketplaces/">Магазины</a>
+					</li>
+					<li><a href="/rubric">Для женщин</a>
+                        <ul>
+                     {% get_nav_female %}
+					</ul>
+					<li><a href="#">Для мужчин</a>
+                    <ul>{% get_nav_male %}
+
+					</ul></li>
+					<li><a href="#">Для девочек</a><ul>
+                        {% get_nav_childgirl %}
+
+					</ul></li>
+                    <li><a href="#">Для мальчиков</a><ul>
+                        {% get_nav_childboy %}
+
+					</ul></li>
+                    <li><a href="/articles/">Полезное</a></li>
+				</ul>
+
+			</nav>
+
+			<div class="log">
+				<a href="/profile">{{ user.name }}</a>
+				<ul>
+					<li><a href="#"><b>Избранное</b> <span>(321)</span></a></li>
+					<li><a href="#">Настройки</a></li>
+					<li><a href="#">Выход</a></li>
+				</ul>
+			</div>
 
 
-
-
-rlekvnerlnbver
-
-
-    <div>
-      {{ user }}
-      {% if user.is_anonymous %}
-      <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
-      {% else %}
-      <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
-      {% endif %}
-    </div>
-
+			<div class="clr"></div>
+		</div>
+	</header>
 {% block content %}
 
+    {% endblock %}
+	<footer>
+		<div class="inner">
+			<div class="left">
+				<img src="../static-assets/site/img/logo2.png" alt="name" />
 
-{% endblock %}
+				<p>Витринабург - сайт об одежде<br />в магазинах Екатеринбурга</p>
+				<p>Размещение рекламы и сотрудничество:<br />(343) 345-93-27, <a href="mailto:adv@vitrinaburg.ru">adv@vitrinaburg.ru</a></p>
 
-<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
-<script src="{{ STATIC_URL }}angular/angular.min.js"></script>
-<script src="{{ STATIC_URL }}angular/angular-resource.js"></script>
-<script src="{{ STATIC_URL }}angular/app.js"></script>
+				<div class="links">
+					<a href="#">О проекте</a><br />
+					<a href="#">Размещение рекламы</a><br />
+					<a href="#">Добавить магазин</a>
+				</div>
+
+			</div>
+
+			<div class="right">
+				<div id="adv3">
+					<img src="../static-assets/site/img/b2.png" alt="name" />
+				</div>
+
+				<nav>
+					<div>
+						<a href="#">Для женщин</a><br />
+						<a href="#">Одежда</a><br />
+						<a href="#">Верхняя</a><br />
+						<a href="#">Одежда больших размеров</a><br />
+						<a href="#">Для женщин</a><br />
+						<a href="#">Для женщин</a><br />
+					</div><div>
+						<a href="#">Для мужчин</a><br />
+						<a href="#">Одежда</a><br />
+						<a href="#">Верхняя</a><br />
+						<a href="#">Одежда больших размеров</a><br />
+						<a href="#">Для женщин</a><br />
+						<a href="#">Для женщин</a><br />
+					</div><div>
+						<a href="#">Для детей</a><br />
+						<a href="#">Одежда</a><br />
+						<a href="#">Верхняя</a><br />
+						<a href="#">Одежда больших размеров</a><br />
+						<a href="#">Для женщин</a><br />
+						<a href="#">Для женщин</a><br />
+					</div><div>
+						<a href="#">Обувь</a><br />
+						<a href="#">Одежда</a><br />
+						<a href="#">Верхняя</a><br />
+						<a href="#">Одежда больших размеров</a><br />
+						<a href="#">Для женщин</a><br />
+						<a href="#">Для женщин</a><br />
+					</div><div>
+						<a href="#">Ручная работа</a><br />
+						<a href="#">Одежда</a><br />
+						<a href="#">Верхняя</a><br />
+						<a href="#">Одежда больших размеров</a><br />
+						<a href="#">Для женщин</a><br />
+						<a href="#">Для женщин</a><br />
+					</div>
+				</nav>
+			</div>
+			<div class="clr"></div>
+		</div>
+
+	</footer>
+
+
 </body>
-
-
 </html>

@@ -1,0 +1,99 @@
+{% extends "profile/dashboard.html" %}
+
+{% block header %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Vitrinaburg</title>
+
+    <!--<link href="{{ STATIC_URL }}site/bootstrap.css" rel="stylesheet">-->
+    <link href="{{ STATIC_URL }}site/owl.carousel.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/owl.theme.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/owl.transitions.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/main.css" rel="stylesheet">
+
+
+        <script type="text/javascript" src="{{ STATIC_URL }}site/js/jquery.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/bootstrap.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/dropzone.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/jquery.elevatezoom-3.0.8.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/main.js"></script>
+
+{% endblock %}
+
+{% block content %}
+        <h4>Название</h4>
+<p>{{ coll }}</p>
+
+
+        <h4>Описание</h4>
+<p>{{ coll.description }}</p>
+<p><abbr title="attribute">attr</abbr>.</p>
+
+      <h4>Товары коллекции</h4>
+<table class="table table-striped table-hover ">
+  <tbody>
+
+  {% for pic in pics %}
+  <div class="col-sm-4 col-md-3">
+				<div class="thumbnail">
+							<div class="img">
+								<a href="{{ title }}" target="_blank">
+									<img src="http://localhost{{MEDIA_URL}}{{ pic.filename }}" alt="" class="img-responsive">
+								</a>
+							</div>
+							<div class="caption">
+								<form method="post" action="" class="img-info-form" data-pic-id="{{ pic.id }}">
+									<!--<input type="hidden" name="_method" value="PATCH" />-->
+
+									<div class="form-group">
+										<input name="title" type="text" class="form-control" placeholder="Название" value="{{ pic.title }}"
+                                                onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
+									</div>
+									<div class="form-group">
+										<textarea name="description" class="form-control" rows="3" placeholder="Описание"
+                                                onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">{{ pic.description }}</textarea>
+									</div>
+									<div class="form-group">
+										<input name="price" type="text" class="form-control" placeholder="Цена, руб." value="{{ pic.price }}"
+                                                onfocus="if(this.value==this.defaultValue)this.value='';" onblur="if(this.value=='')this.value=this.defaultValue;">
+									</div>
+									<p>
+										<button class="btn btn-primary img-info-form btn-sm" type="submit">Сохранить</button>
+										<button class="btn btn-danger pull-right img-remove-button btn-sm   " data-pic-id="{{ pic.id }}" type="button">Удалить</button>
+									</p>
+								</form>
+							</div>
+						</div>
+					</div>
+  {% endfor %}
+
+
+  </tbody>
+</table>
+
+
+</br>
+<a href="{{ coll.get_absolute_url }}update/" class="btn btn-primary">Редактировать коллецию</a>
+
+
+<div class="container">
+    <h1>Загрузчик фотографий</h1>
+    <p class="margin-top-30">
+        <button type="button" class="btn btn-primary add-photo-button dz-clickable">Загрузить фотографии</button>
+    </p>
+    <div class="uploaded-photos row margin-top-30">
+
+    </div>
+</div>
+
+
+
+<input style="visibility: hidden; position: absolute; top: 0px; left: 0px; height: 0px; width: 0px;" accept="image/*" class="dz-hidden-input" multiple="multiple" type="file">
+
+
+    </body>
+</html>
+{% endblock %}

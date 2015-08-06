@@ -7,6 +7,8 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from customauth.models import MyUser
 
 
+
+
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -15,7 +17,7 @@ class UserCreationForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'date_of_birth')
+        fields = ('name', 'email', 'date_of_birth')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -43,7 +45,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('email', 'password', 'date_of_birth', 'is_active', 'is_admin')
+        fields = ('name', 'email', 'password', 'date_of_birth', 'is_active', 'is_admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -63,7 +65,7 @@ class MyUserAdmin(UserAdmin):
     list_display = ('email', 'date_of_birth', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
+        (None, {'fields': ('name', 'email', 'password')}),
         ('Personal info', {'fields': ('date_of_birth',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
@@ -72,12 +74,20 @@ class MyUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'date_of_birth', 'password1', 'password2')}
+            'fields': ('name', 'email', 'date_of_birth', 'password1', 'password2')}
         ),
     )
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+
+from django.views.generic import CreateView
+
+class CreateUser(CreateView):
+    model = MyUser
+    form_class = UserCreationForm
+    success_url = "/profile/"
+    template_name = "myuser_form.html"
 
 # Now register the new UserAdmin...
 admin.site.register(MyUser, MyUserAdmin)

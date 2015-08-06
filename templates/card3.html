@@ -1,0 +1,123 @@
+
+{% extends "base.html" %}
+
+{% block header %}
+
+    <link href="http://yastatic.net/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/main.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+
+	<section id="content">
+		<aside id="l1">
+
+			<nav>
+				<ul>
+                      {% load mptt_tags %}{% load current_tags %}{% get_side_menu %}
+				</ul>
+			</nav>
+
+			<div id="social">
+				<img src="../static-assets/site/img/s.png" alt="name" />
+			</div>
+
+
+		</aside>
+
+
+		<div id="right">
+
+
+			<div id="pathway">
+				<a href="#">Главная</a>
+    {% for parent in view.pics.current_category.get_ancestors %}
+                <a href="/catalog/{{parent.slug }}">{{ parent.title}}</a>
+                {% endfor %}<a href="#">{{ view.pics.current_category.title}}</a>
+			</div>
+
+
+			<h2>{{ view.pics.collection.title}}</h2>
+            <ul>
+
+</ul>
+
+
+	<div class="container">
+    <ul style="opacity: 1; display: block;" class="list-inline photo-gallery owl-carousel owl-theme">
+						<div class="owl-wrapper-outer"><div style="width: 8208px; left: 0px; display: block;" class="owl-wrapper">
+                            {% for pic in view.pics.pics %}
+
+                            <div style="width: 128px;" class="owl-item"><li class="item">
+							<a href="{{ pic.filename }}" data-img-name="530jpg_qOG8itI.jpeg" target="_blank">
+								<img src="{{ pic.medium }}" data-zoom-image="{{ pic.filename }}" alt="" class="img-responsive">
+							</a>
+						</li></div>
+
+                            {% endfor %}
+
+
+                        </div></div>
+
+
+
+					<div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div></ul>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="photo"><img src="{{ STATIC_URL }}site/js/c593a656eafecda8952f8021e380834b.jpeg" data-zoom-image="/uploads/8b39bda80bc2d29d6c0f201f92e55b9a.jpeg" alt="" class="img-responsive"></div>
+        </div>
+    </div>
+</div>
+
+
+
+	  <div class="ad-image-wrapper"></div>
+
+			<div class="info">
+                <h3>Где купить</h3>
+                <p>Магазин: <a href="#">Белка</a>
+					<br />
+					<span addr="ул. Свердлова, д. 62" class="showMap">ул. Свердлова, д. 62</span><br />
+					<span addr="ул. Свердлова, д. 62" class="showMap">ул. Свердлова, д. 62</span>
+				</p>
+				<div class="know">
+					Уточните наличие по телефону:
+					<br />
+						<a href="#">показать телефон</a>
+
+                    <div class="phone"><b>(343) 353-12-92, 378-13-91</b></div>
+                </div>
+                    <div class="logotype">
+						<a href="#"><img src="{{ STATIC_URL }}site/img/img4.png" alt="name"></a>
+					</div>
+
+					 <a id="tofav2" href="#">В избранное</a>
+					<a id="tofav2" class="in" href="#">В избранном</a>
+
+					<a href="#">Смотреть все коллекции магазина</a>
+
+					<p>Новая коллекция изделий из кожи Новая коллекция изделий из кожи Новая коллекция изделий из кожи</p>
+
+              </div>
+
+		<div class="clr"></div>
+
+    </div>
+
+
+		</div>
+
+	</section>
+
+<script type="text/javascript" src="http://yastatic.net/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://yastatic.net/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/dropzone/dropzone.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/main.js"></script>
+
+{% endblock%}

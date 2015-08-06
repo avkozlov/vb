@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-from .models  import Coll, Picture
+from .models  import Coll, Picture, Shop, Rubrica, Marketplace, City, Seo
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, TemplateView
 from authvb.models import LoggedMixin
 from django import forms
 
@@ -14,7 +14,7 @@ from django import forms
 class CollForm(forms.ModelForm):
     class Meta(object):
         model = Coll
-        #exclude = ('owner',)
+        exclude = ('owner',)
 
 
 
@@ -32,97 +32,151 @@ def home(request):
     return render_to_response("upload.html", locals(), context_instance=RequestContext(request))
 
 
-class PostsIndex(ListView):
-    model = Coll
-    context_object_name = 'posts'
-    template_name = 'home.html'
+def rubric(request):
 
-    def get_queryset(self):
-        qs = Coll.objects.filter(site = get_current_site(self.request))
+    return render_to_response("rubric.html", locals(), context_instance=RequestContext(request))
 
-        return qs
+def testmenu(request):
+        return render_to_response("testmenu.html", {}, context_instance=RequestContext(request))
 
-class PostDetail(LoggedMixin, DetailView):
 
-    model = Coll
-    context_object_name = 'post1'
-    template_name = 'home.html'
+def category_page(request):
+    #getting detail information about current object
+    current_category = Rubrica.objects.get(id=4 )
+    root_category_id = current_category.get_root().id
+    #render
+    return render_to_response("menu.html",
+                          {
+                              'nodes':Rubrica.objects.all(),
+                              'current_category':current_category,
+                              'root_category_id':root_category_id
+                          },
+                          context_instance=RequestContext(request))
+
+
+
+class PicsRubric(TemplateView):
+    model = Picture
+    context_object_name = 'pics'
+    template_name = 'rubric.html'
+
 
     def get_context_data(self, **kwargs):
-        context = super(PostDetail, self).get_context_data(**kwargs)
-        context['article'] = Coll.objects.get(pk=self.object.pk)
+        context = super(PicsRubric, self).get_context_data(**kwargs)
+        context['rubric'] = get_object_or_404(Rubrica, slug__iexact=self.kwargs['slug'])
+
         return context
 
-class CreateColl(CreateView):
-    form_class = CollForm
-    template_name = 'create.html'
-    success_url = '/success/'
+    def pics(self):
+        itemstoreturn = {}
+        itemstoreturn["rubric"] = get_object_or_404(Rubrica, slug__iexact=self.kwargs['slug'])
+        itemstoreturn["current_category"] =  itemstoreturn["rubric"]
+        itemstoreturn["family"] = itemstoreturn["rubric"].get_family()
+        itemstoreturn["root_category_id"] =  itemstoreturn["rubric"].get_root().id
+        itemstoreturn["nodes"] =  Rubrica.objects.all()
 
-    # def form_valid(self, form):
-    #     Coll.objects.create(**form.cleaned_data)
-    #     return redirect(self.get_success_url())
+        itemstoreturn["h1"] = itemstoreturn["current_category"].h1
+        itemstoreturn["seo"] = Seo.objects.get(rubrica = itemstoreturn["current_category"])
+        if itemstoreturn["rubric"].get_descendants():
+            itemstoreturn["rubric"] = itemstoreturn["rubric"].get_descendants()
+        city = City.objects.get(site = get_current_site(self.request))
+        #itemstoreturn["classes"] = Rubrica.objects.filter(pk=17).select_subclasses()
+        cls = Coll.objects.filter(city = city, rubric = itemstoreturn["rubric"])
+        itemstoreturn["pics2"] = Picture.objects.filter(collection = cls).order_by('-pub_date')
+        return itemstoreturn
 
 
-class UpdateColl(UpdateView):
+
+
+    def title(self):
+        titles = {}
+        #titles['h1'] = get_object_or_404(Rubrica, slug__iexact=self.kwargs['slug'])
+        titles['h2'] = "regewrget"
+
+        return titles
+
+    def rubsmale(self):
+        return Rubrica.objects.filter(gender = 1)
+
+    def rubsfemale(self):
+        return Rubrica.objects.filter(gender = 2)
+
+
+class Markets(ListView):
+    model = Marketplace
+    context_object_name = 'markets'
+    template_name = 'marketplaces.html'
+
+    def shops(self):
+
+        return Shop.objects.all()
+
+class Market(DetailView):
+    model = Marketplace
+    context_object_name = 'markets'
+    template_name = 'market.html'
+
+    def get_shop(self):
+
+        marketplace = get_object_or_404(Marketplace, slug__iexact=self.kwargs['slug'])
+
+        return Shop.objects.filter(marketplace=marketplace)
+
+
+def profile(request):
+    return render_to_response("profile/dashboard.html", locals(), context_instance=RequestContext(request))
+
+class PicsIndex(TemplateView):
+    model = Picture
+    context_object_name = 'pics'
+    template_name = 'index.html'
+
+    def pics(self):
+        city = City.objects.get(site = get_current_site(self.request))
+        cls = Coll.objects.filter(city = city)
+        return Picture.objects.filter(collection = cls).order_by('-pub_date')[0:9]
+
+
+
+class CollPicsDetail(DetailView):
+
     model = Coll
-    template_name = 'update.html'
+    context_object_name = 'pics'
+    template_name = 'card1.html'
+
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(CollPicsDetail, self).get_context_data(**kwargs)
+    #     #context['colls'] = Coll.objects.get(pk=self.object.pk)
+    #     return context
+    def pics(self):
+        itemstoreturn = {}
+        itemstoreturn["collection"] = get_object_or_404(Coll, slug__iexact=self.kwargs['slug'])
+        itemstoreturn["rubric"] = itemstoreturn["collection"].rubric
+        itemstoreturn["pics"] = Picture.objects.filter(collection=self.object)
+        itemstoreturn["current_category"] =  itemstoreturn["rubric"]
+        itemstoreturn["root_category"] =  itemstoreturn["rubric"].get_root()
+        itemstoreturn["nodes"] =  Rubrica.objects.all()
+        itemstoreturn["ancestors"] = itemstoreturn["current_category"].get_ancestors()
+        itemstoreturn["seo"] = Seo.objects.get(rubrica = itemstoreturn["current_category"])
+
+        return itemstoreturn
+
+    def get_context_data(self, **kwargs):
+            context = super(CollPicsDetail, self).get_context_data(**kwargs)
+            context['rubric'] = get_object_or_404(Coll, slug__iexact=self.kwargs['slug']).rubric
+
+            return context
 
 
 
-from serializers import CollSerializer, PictureSerializer
+from serializers import CollSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+
 # from apps.rest_api.viewsets import CreateModelViewSet, CreateListModelViewSet
 
-class SnippetList(APIView):
-    """
-    List all snippets, or create a new snippet.
-    """
-    def get(self, request, format=None):
-        snippets = Coll.objects.all()
-        serializer = CollSerializer(snippets, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, format=None):
-        serializer = CollSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class SnippetDetail(APIView):
-    """
-    Retrieve, update or delete a snippet instance.
-    """
-    def get_object(self, pk):
-        try:
-            return Coll.objects.get(pk=pk)
-        except Coll.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, format=None):
-        snippet = self.get_object(pk)
-        serializer = CollSerializer(snippet)
-        return Response(serializer.data)
-
-    def put(self, request, pk, format=None):
-        snippet = self.get_object(pk)
-        serializer = CollSerializer(snippet, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk, format=None):
-        snippet = self.get_object(pk)
-        snippet.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-# Generic ListViewAPI
 
 from rest_framework import generics
 
@@ -136,39 +190,51 @@ class SnippetDetaily(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CollSerializer
 
 
+
+
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect
+
+##########################################
+
+from forms import CollForm, ShopForm
+from django.shortcuts import get_object_or_404
 
 
 
-class PhotoList(generics.ListCreateAPIView):
-    queryset = Picture.objects.all()
-    serializer_class = PictureSerializer
 
-
-    @csrf_exempt
-    def dispatch(self, *args, **kwargs):
-        return super(PhotoList, self).dispatch(*args, **kwargs)
+from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
+from django.template.response import TemplateResponse
 
 
 
-# class PhotoUploadListView(CreateListModelViewSet):
-#     """
-#     API endpoint for photo upload and listing
-#     """
+
+# class PictureUpdateView(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Picture.objects.all()
 #     serializer_class = PictureSerializer
-#
-#
-#
-    # def post(self, request, *args, **kwargs):
-    #     return self.create(request, *args, **kwargs)
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
 
 
-class PhotoDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Picture.objects.all()
-    serializer_class = PictureSerializer
+
+
+
+# class CreatePictures(generics.CreateAPIView):
+#     queryset = Picture.objects.all()
+#     serializer_class = PictureSerializer
+#     renderer_classes = (JSONRenderer, TemplateHTMLRenderer,)
+#     template_name = "profile/img.html"
+#
+#
+#     def get_queryset(self):
+#
+#         usere = self.request.user
+#         title = self.response.title
+#         response = self.response
+#         return response
+
+
+# class PhotoDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Picture.objects.all()
+#     serializer_class =    PictureSerializer
 
 
 

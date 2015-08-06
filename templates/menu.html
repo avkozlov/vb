@@ -1,0 +1,6 @@
+ {% load mptt_tags %}
+        {% for node in nodes %}
+            {% if node.level > 1 %}
+            <li><a href="{{ node.get_absolute_url }}">{{ node.title }}</a>
+            {% endif %}
+        {% endfor %}

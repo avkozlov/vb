@@ -1,0 +1,61 @@
+    {% extends "base.html" %}
+
+    {% block content %}
+	<section id="content">
+		<aside id="l1">
+		
+			<nav>
+				<ul><li class="">Все магазины<ul>
+                  {% load current_tags %}{% get_markets %}
+				</ul></li></ul>
+			</nav>
+			
+			<div id="social">
+				<img src="{{ STATIC_URL }}site  /img/s.png" alt="name" />
+			</div>
+			
+			
+		</aside>
+	
+	
+		<div id="right">
+			<div id="adv">
+				<img src="{{ STATIC_URL }}site/img/img.png" alt="name" />
+			</div>
+
+			<div id="pathway">
+				<a href="#">Главная</a>
+    {% for parent in view.pics.current_category.get_ancestors %}
+                <a href="/catalog/{{parent.slug }}">{{ parent.title}}</a>
+                {% endfor %}<a href="#">{{ view.pics.current_category.title}}</a>
+			</div>
+
+
+			<h1>{{ view.pics.h1 }} в городе</h1>
+	
+	<ul>
+
+        {% for shop in view.get_shop %}
+        {{ shop.title }}
+        {% endfor %}
+                {% for letter in 'ABCD' %}
+				<li>
+					<a href="#" target="_blank">{{ letter }}</a>
+
+
+				</li>
+                {% endfor %}
+			</ul>
+            </br>
+        {{ view.pics.rubric.get_children }}</br>
+
+             {{ view.pics.family }}
+            </br>
+        {{ view.pics.seo }}
+            {{ view.pics.flag }}
+			
+			
+		</div>
+		
+	</section>
+    {% endblock %}

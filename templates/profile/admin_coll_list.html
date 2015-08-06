@@ -1,0 +1,29 @@
+{% extends 'profile/dashboard.html' %}
+
+{% block content %}
+ <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Просмотреть коллекцию</th>
+                  <th>Рубрика</th>
+                  <th>Редактировать</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for coll in colls %}
+                <tr>
+                  <td><a href="{{ coll.get_absolute_url }}">{{ coll }}</a></td>
+                  <td>{{ coll.rubric }}</td>
+                  <td><a href="{{ coll.get_absolute_url }}update">(ред)</а></td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+<a href="/profile/createnewcoll/" class="btn btn-primary">Создать коллецию</a>
+
+{% endblock %}
+
+

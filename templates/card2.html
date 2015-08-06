@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vitrinaburg</title>
+    <link href="http://yastatic.net/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+
+      <h2>Галерея фотографий</h2>
+    <ul class="list-inline photo-gallery">
+       {% for pic in view.pics.pics %}
+
+        <div style="width: 128px;" class="owl-item"><li class="item">
+							<a href="{{ pic.filename }}" data-img-name="530jpg_qOG8itI.jpeg" target="_blank">
+								<img src="{{ pic.medium }}" data-zoom-image="{{ pic.filename }}" alt="" class="img-responsive">
+							</a>
+						</li></div>
+
+        {% endfor %}
+    </ul>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="photo">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="http://yastatic.net/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://yastatic.net/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/dropzone/dropzone.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/main.js"></script>
+</body>
+</html>

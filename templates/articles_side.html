@@ -1,0 +1,12 @@
+
+
+
+        {% for node in nodes %}
+             <div class="item">
+					<div class="img"><a href="articles/{{ node.slug }}"><img src="{{ node.thumb }}" alt="name" /></a></div>
+					<div class="text">
+						<a href="articles/{{ node.slug }}">{{ node.title }}</a>
+						<span class="date">{{ node.pub_date }}</span>
+					</div>
+				</div>
+        {% endfor %}

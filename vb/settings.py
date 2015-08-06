@@ -38,11 +38,18 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
+    "django.core.context_processors.request",
 )
 
 REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
         'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ),
+     'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
     )
 }
 
@@ -63,11 +70,16 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'catalog',
+    'tinymce',
     'madmin',
     'authvb',
     'rest_framework',
     'customauth',
     'sorl.thumbnail',
+    'mptt',
+    'catalog.templatetags',
+    'articles',
+    'api',
 
 )
 
@@ -148,5 +160,7 @@ SESSION_COOKIE_NAME = "anycook"
 
 TEMPLATE_DIRS = (
     'templates',
+    os.path.join(BASE_DIR, 'templates'),
 )
 
+THUMBNAIL_DEBUG = True

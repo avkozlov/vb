@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+	<section id="content">
+		<aside id="l1">
+
+			<nav>
+				<ul>
+                      {% load mptt_tags %}{% load current_tags %}{% get_side_menu %}
+				</ul>
+			</nav>
+
+			<div id="social">
+				<img src="../static-assets/site/img/s.png" alt="name" />
+			</div>
+
+
+		</aside>
+
+	
+		<div id="right">
+
+
+			<div id="pathway">
+				<a href="#">Главная</a>
+    {% for parent in view.pics.current_category.get_ancestors %}
+                <a href="/catalog/{{parent.slug }}">{{ parent.title}}</a>
+                {% endfor %}<a href="#">{{ view.pics.current_category.title}}</a>
+			</div>
+
+			
+			<h1>{{ view.pics.collection.title}}</h1>
+            <ul>
+
+</ul>
+
+	
+	<div id="gallery2" class="ad-gallery">
+      
+      <div class="ad-controls">
+      </div>
+      <div class="ad-nav">
+        <div class="ad-thumbs">
+          <ul class="ad-thumb-list">
+              {% for pic in view.pics.pics %}
+            <li>
+              <a href="http://localhost{{MEDIA_URL}}{{ pic.filename }}">
+                <img src="http://localhost{{ pic.thumb }}" class="image{{ pic.id }}" title="56 000 рублей">
+              </a>
+            </li>
+              {% endfor %}
+           </ul>
+        </div>
+      </div>
+	  <div class="ad-image-wrapper"></div>
+ 
+			<div class="info">
+                <h3>Где купить</h3>
+                <p>Магазин: <a href="#">Белка</a>
+					<br />
+					<span addr="ул. Свердлова, д. 62" class="showMap">ул. Свердлова, д. 62</span><br />
+					<span addr="ул. Свердлова, д. 62" class="showMap">ул. Свердлова, д. 62</span>
+				</p>
+				<div class="know">
+					Уточните наличие по телефону:
+					<br />
+						<a href="#">показать телефон</a>
+					
+                    <div class="phone"><b>(343) 353-12-92, 378-13-91</b></div>
+                </div>
+                    <div class="logotype">
+						<a href="#"><img src="{{ STATIC_URL }}site/img/img4.png" alt="name"></a>
+					</div>
+					
+					 <a id="tofav2" href="#">В избранное</a> 
+					<a id="tofav2" class="in" href="#">В избранном</a> 
+					
+					<a href="#">Смотреть все коллекции магазина</a>
+					
+					<p>Новая коллекция изделий из кожи Новая коллекция изделий из кожи Новая коллекция изделий из кожи</p>
+					
+              </div>
+	  
+		<div class="clr"></div>
+	  
+    </div>
+			
+			
+		</div>
+		
+	</section>
+
+{% endblock%}

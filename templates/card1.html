@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block header %}
+
+    <link href="http://yastatic.net/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.theme.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.transitions.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}site/css/main.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+	<section id="content">
+		<aside id="l1">
+
+			<nav>
+				<ul>
+                      {% load mptt_tags %}{% load current_tags %}{% get_side_menu %}
+				</ul>
+			</nav>
+
+			<div id="social">
+				<img src="../static-assets/site/img/s.png" alt="name" />
+			</div>
+
+
+		</aside>
+
+	
+		<div id="right">
+
+
+			<div id="pathway">
+				<a href="#">Главная</a>
+    {% for parent in view.pics.current_category.get_ancestors %}
+                <a href="/catalog/{{parent.slug }}">{{ parent.title}}</a>
+                {% endfor %}<a href="#">{{ view.pics.current_category.title}}</a>
+			</div>
+
+			
+			<h1>{{ view.pics.collection.title}}</h1>
+    <div class="container">
+
+      <h2>Галерея фотографий</h2>
+    <ul class="list-inline photo-gallery">
+       {% for pic in view.pics.pics %}
+
+                    <li class="item">
+							<a href="http://localhost/{{ pic.filename }}" data-img-name="{{ pic.filename }}" target="_blank">
+								<img src="{{ pic.medium }}" data-zoom-image="{{ pic.filename }}" alt="" class="img-responsive">
+							</a>
+						</li>
+
+        {% endfor %}
+    </ul>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="photo">
+            </div>
+        </div>
+    </div>
+	
+
+</div>
+
+
+
+	  <div class="ad-image-wrapper"></div>
+ 
+			<div class="info">
+                <h3>Где купить</h3>
+                <p>Магазин: <a href="#">Белка</a>
+					<br />
+					<span addr="ул. Свердлова, д. 62" class="showMap">ул. Свердлова, д. 62</span><br />
+					<span addr="ул. Свердлова, д. 62" class="showMap">ул. Свердлова, д. 62</span>
+				</p>
+				<div class="know">
+					Уточните наличие по телефону:
+					<br />
+						<a href="#">показать телефон</a>
+					
+                    <div class="phone"><b>(343) 353-12-92, 378-13-91</b></div>
+                </div>
+                    <div class="logotype">
+						<a href="#"><img src="{{ STATIC_URL }}site/img/img4.png" alt="name"></a>
+					</div>
+					
+					 <a id="tofav2" href="#">В избранное</a> 
+					<a id="tofav2" class="in" href="#">В избранном</a> 
+					
+					<a href="#">Смотреть все коллекции магазина</a>
+					
+					<p>Новая коллекция изделий из кожи Новая коллекция изделий из кожи Новая коллекция изделий из кожи</p>
+					
+              </div>
+	  
+		<div class="clr"></div>
+	  
+    </div>
+			
+			
+		</div>
+		
+	</section>
+
+
+<script type="text/javascript" src="http://yastatic.net/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://yastatic.net/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/dropzone/dropzone.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/main.js"></script>
+
+{% endblock%}

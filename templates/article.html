@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+        {% block content %}
+	
+	<section id="content">
+		<div id="right">
+			<div id="adv">
+				<img src="../static-assets/site/img/img.png" alt="name" />
+			</div>
+			
+			<div id="date">15 Января</div>
+			
+			<h1>{{ article.title }}</h1>
+			
+			<article>
+				<div class="like">
+					<img src="../static-assets/site/img/img6.png" alt="name" />
+				</div>
+			
+				<div class="text-art">
+                    {{ article.body }}
+				</div>
+			
+			</article>
+			
+		</div>
+		<aside>
+			
+			<div id="adv2">
+				<a href="#"><img src="../static-assets/site/img/b1.png" alt="name" /></a>
+			</div>
+			<div id="social">
+				<img src="../static-assets/site/img/s.png" alt="name" />
+			</div>
+			
+			<div id="forum">
+				<div class="item">
+					<a href="#">Форум</a> <span>800 тем</span>
+				</div>
+				<div class="item">
+					<a href="#">Покупка вещей через интернет-магазин</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+				<div class="item">
+					<a href="#">Безвкусица</a> <span>22</span>
+				</div>
+			</div>
+			
+		</aside>
+	</section>
+
+                {% endblock %}

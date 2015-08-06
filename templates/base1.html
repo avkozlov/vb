@@ -1,0 +1,44 @@
+<html>
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Optional theme -->
+<link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+</head>
+
+<body ng-app="{% block ng-app %}example.app{% endblock %}">
+
+
+
+
+rlekvnerlnbver
+
+
+    <div>
+      {{ user }}
+      {% if user.is_anonymous %}
+      <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
+      {% else %}
+      <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+      {% endif %}
+    </div>
+
+{% block content %}
+
+
+{% endblock %}
+
+<script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}angular/angular.min.js"></script>
+<script src="{{ STATIC_URL }}angular/angular-resource.js"></script>
+<script src="{{ STATIC_URL }}angular/app.js"></script>
+</body>
+
+
+</html>
+

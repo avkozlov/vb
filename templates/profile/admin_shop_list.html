@@ -1,0 +1,34 @@
+{% extends 'profile/dashboard.html' %}
+
+
+{% block content %}
+
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Просмотреть магазин</th>
+                  <th>Header</th>
+                  <th>Редактировать</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for shop in shops %}
+                <tr>
+                  <td><a href="{{ shop.get_absolute_url }}">{{ shop }}</a></td>
+                  <td>ipsum</td>
+                  <td><a href="{{ shop.get_absolute_url }}update">(ред)</а></td>
+                  <td>sit</td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+<a href="/profile/createshop" class="btn btn-primary">Добавить магазин</a>
+
+{% endblock %}
+
+

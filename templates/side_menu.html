@@ -1,0 +1,30 @@
+ {% load mptt_tags %}
+      {% recursetree nodes %}
+        <li class="{% if current_category.id == node.id %}opened{% endif %}">
+
+            <a href="/catalog/{{ node.slug }}/">
+            {{ node.title }}
+            </a>
+            {% if node.is_root_node %}
+                {% ifequal node.id root_category_id %}
+                    {% if not node.is_leaf_node %}
+                        <ul>
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                {% endifequal %}
+            {% else %}
+                {% if not node.is_leaf_node %}
+                    {% if current_category.id == node.id %}
+                        <ul>
+                         {{ children }}
+                        </ul>
+                        {% elif node.level < current_category.level %}
+                        <ul>
+                                {{ children }}
+                        </ul>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </li>
+    {% endrecursetree %}
