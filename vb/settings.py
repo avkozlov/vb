@@ -153,10 +153,13 @@ STATICFILES_DIRS = (
    os.path.join(BASE_DIR,'static-assets/'),
 )
 
+SESSION_COOKIE_SECURE = False
 
-SESSION_COOKIE_DOMAIN = ".localhost"
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
-SESSION_COOKIE_NAME = "anycook"
+SESSION_COOKIE_DOMAIN = ".past.ru"
+
+#SESSION_COOKIE_NAME = "anycook"
 
 TEMPLATE_DIRS = (
     'templates',
